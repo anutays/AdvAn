@@ -1,7 +1,15 @@
 package advan;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
@@ -35,22 +43,12 @@ public class MainWindow extends javax.swing.JFrame {
         rightPanel.setAlignmentX(0.2F);
         rightPanel.setAlignmentY(0.0F);
         rightPanel.setMinimumSize(new java.awt.Dimension(0, 0));
-
-        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
-        rightPanel.setLayout(rightPanelLayout);
-        rightPanelLayout.setHorizontalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 86, Short.MAX_VALUE)
-        );
-        rightPanelLayout.setVerticalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
-        );
-
+        rightPanel.setLayout(null);
         getContentPane().add(rightPanel);
         rightPanel.setBounds(310, 0, 90, 300);
 
         bottomPanel.setBackground(new java.awt.Color(153, 255, 51));
+        bottomPanel.setLayout(null);
 
         infoPanel.setBackground(new java.awt.Color(102, 0, 153));
 
@@ -58,25 +56,15 @@ public class MainWindow extends javax.swing.JFrame {
         infoPanel.setLayout(infoPanelLayout);
         infoPanelLayout.setHorizontalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 157, Short.MAX_VALUE)
+            .addGap(0, 130, Short.MAX_VALUE)
         );
         infoPanelLayout.setVerticalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 70, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
-        bottomPanel.setLayout(bottomPanelLayout);
-        bottomPanelLayout.setHorizontalGroup(
-            bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
-                .addGap(0, 153, Short.MAX_VALUE)
-                .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        bottomPanelLayout.setVerticalGroup(
-            bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        bottomPanel.add(infoPanel);
+        infoPanel.setBounds(180, 0, 130, 70);
 
         getContentPane().add(bottomPanel);
         bottomPanel.setBounds(0, 230, 310, 70);
@@ -87,11 +75,11 @@ public class MainWindow extends javax.swing.JFrame {
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 310, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 230, Short.MAX_VALUE)
         );
 
         getContentPane().add(mainPanel);
@@ -129,6 +117,11 @@ public class MainWindow extends javax.swing.JFrame {
                 else if (i <= 5) buttons[i].setLocation(buttons[i].getSize().width * (i - 3), buttons[i].getSize().height);
                 else if (i <= 8) buttons[i].setLocation(buttons[i].getSize().width * (i - 6), buttons[i].getSize().height * 2);
             }
+            infoPanel.setLocation(buttons[0].getSize().width * 3, 0);
+            infoPanel.setSize(bottomPanel.getSize().width / 2, bottomPanel.getSize().height - insets.top - 13);
+            
+            mainPictureBox.setImage(currentImage);
+            mainPictureBox.setSize(rightPanel.getSize().width - 20, rightPanel.getSize().height / 2);
         }  
     }//GEN-LAST:event_formComponentResized
 
@@ -170,9 +163,18 @@ public class MainWindow extends javax.swing.JFrame {
             buttons[i].setText(String.valueOf(bottomPanel.getSize().height / 3));
         }
         
-        //infoPanel.setLocation(bottomPanel.getSize().width / 2, WIDTH);
+        infoPanel.setLocation(buttons[0].getSize().width * 3, 0);
+        infoPanel.setSize(bottomPanel.getSize().width / 2, bottomPanel.getSize().height - insets.top - 13);
         
-        
+        try {
+            currentImage = ImageIO.read(MainWindow.class.getResource("pictures/1.PNG"));
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        mainPictureBox.setImage(currentImage);
+        mainPictureBox.setLocation(0, 0);
+        mainPictureBox.setSize(rightPanel.getSize().width - 20, rightPanel.getSize().height / 2);
+        rightPanel.add(mainPictureBox);
         
         resizeWindow = true;
     }//GEN-LAST:event_formWindowOpened
@@ -214,10 +216,42 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel rightPanel;
     // End of variables declaration//GEN-END:variables
     javax.swing.JButton[] buttons = new javax.swing.JButton[9];
+    PictureBox mainPictureBox = new PictureBox();
+    Image currentImage = null;
     int cellsWidth = 14;
     int cellsHeight = 10;
     private javax.swing.JPanel[][] mainPanels = new javax.swing.JPanel[cellsWidth][cellsHeight];
     private java.util.Random rnd = new java.util.Random();
     boolean resizeWindow = false;
     Insets insets;
+}
+class PictureBox extends javax.swing.JLabel
+{
+    Image image;
+    void setImage(Image _image)
+    {
+        image = _image;
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    if (image != null) {
+        double imgRatio = (double) image.getWidth(null) / image.getHeight(null);
+        double labelRatio = (double) getWidth() / getHeight();
+
+        int newWidth, newHeight;
+        if (labelRatio > imgRatio) {
+            newHeight = getHeight();
+            newWidth = (int) (newHeight * imgRatio);
+        } else {
+            newWidth = getWidth();
+            newHeight = (int) (newWidth / imgRatio);
+        }
+        int x = (getWidth() - newWidth) / 2;
+        int y = (getHeight() - newHeight) / 2;
+
+        image = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        g.drawImage(image, x, y, newWidth, newHeight, this);
+    }
+}
 }
