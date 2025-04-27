@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 public class AdvAn {
     static final Dimension WINDOW_SIZE = new Dimension(900, 700);
     public static void main(String[] args) {
+        System.setProperty("sun.java2d.uiScale", "1");
         MainWindow win = ShowWin();
         
     }

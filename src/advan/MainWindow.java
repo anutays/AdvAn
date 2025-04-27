@@ -1,6 +1,7 @@
 package advan;
 
 import java.awt.Color;
+import java.awt.Insets;
 public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
@@ -9,8 +10,9 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuPanel = new javax.swing.JPanel();
-        textPanel = new javax.swing.JPanel();
+        rightPanel = new javax.swing.JPanel();
+        bottomPanel = new javax.swing.JPanel();
+        infoPanel = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -28,41 +30,56 @@ public class MainWindow extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        menuPanel.setBackground(new java.awt.Color(255, 51, 51));
-        menuPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        menuPanel.setAlignmentX(0.2F);
-        menuPanel.setAlignmentY(0.0F);
-        menuPanel.setMinimumSize(new java.awt.Dimension(0, 0));
+        rightPanel.setBackground(new java.awt.Color(255, 51, 51));
+        rightPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        rightPanel.setAlignmentX(0.2F);
+        rightPanel.setAlignmentY(0.0F);
+        rightPanel.setMinimumSize(new java.awt.Dimension(0, 0));
 
-        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 94, Short.MAX_VALUE)
+        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
+        rightPanel.setLayout(rightPanelLayout);
+        rightPanelLayout.setHorizontalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 86, Short.MAX_VALUE)
         );
-        menuPanelLayout.setVerticalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(menuPanel);
-        menuPanel.setBounds(310, 0, 98, 248);
-
-        textPanel.setBackground(new java.awt.Color(153, 255, 51));
-
-        javax.swing.GroupLayout textPanelLayout = new javax.swing.GroupLayout(textPanel);
-        textPanel.setLayout(textPanelLayout);
-        textPanelLayout.setHorizontalGroup(
-            textPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
-        );
-        textPanelLayout.setVerticalGroup(
-            textPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        rightPanelLayout.setVerticalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 296, Short.MAX_VALUE)
         );
 
-        getContentPane().add(textPanel);
-        textPanel.setBounds(0, 150, 310, 100);
+        getContentPane().add(rightPanel);
+        rightPanel.setBounds(310, 0, 90, 300);
+
+        bottomPanel.setBackground(new java.awt.Color(153, 255, 51));
+
+        infoPanel.setBackground(new java.awt.Color(102, 0, 153));
+
+        javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
+        infoPanel.setLayout(infoPanelLayout);
+        infoPanelLayout.setHorizontalGroup(
+            infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 157, Short.MAX_VALUE)
+        );
+        infoPanelLayout.setVerticalGroup(
+            infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
+        bottomPanel.setLayout(bottomPanelLayout);
+        bottomPanelLayout.setHorizontalGroup(
+            bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
+                .addGap(0, 153, Short.MAX_VALUE)
+                .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        bottomPanelLayout.setVerticalGroup(
+            bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(bottomPanel);
+        bottomPanel.setBounds(0, 230, 310, 70);
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -78,7 +95,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         getContentPane().add(mainPanel);
-        mainPanel.setBounds(0, 0, 310, 150);
+        mainPanel.setBounds(0, 0, 310, 230);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -99,16 +116,25 @@ public class MainWindow extends javax.swing.JFrame {
             
             mainPanel.setSize(mainPanels[0][0].getSize().width * cellsWidth, mainPanels[0][0].getSize().height * cellsHeight);
         
-            textPanel.setSize((int)((double)this.getSize().width * 0.8), this.getSize().height - mainPanel.getSize().height);
-            textPanel.setLocation(0, this.getSize().height - textPanel.getSize().height);
+            bottomPanel.setSize((int)((double)this.getSize().width * 0.8), this.getSize().height - mainPanel.getSize().height);
+            bottomPanel.setLocation(0, this.getSize().height - bottomPanel.getSize().height);
             
-            menuPanel.setSize(this.getSize().width - mainPanel.getSize().width, this.getSize().height);
-            menuPanel.setLocation(this.getSize().width - menuPanel.getSize().width, 0);
+            rightPanel.setSize(this.getSize().width - mainPanel.getSize().width, this.getSize().height);
+            rightPanel.setLocation(this.getSize().width - rightPanel.getSize().width, 0);
+            
+            for (int i = 0; i < 9; i++)
+            {
+                buttons[i].setSize(bottomPanel.getSize().width / 6, (bottomPanel.getSize().height - insets.top - 13) / 3);
+                if (i <= 2) buttons[i].setLocation(buttons[i].getSize().width * i, 0);
+                else if (i <= 5) buttons[i].setLocation(buttons[i].getSize().width * (i - 3), buttons[i].getSize().height);
+                else if (i <= 8) buttons[i].setLocation(buttons[i].getSize().width * (i - 6), buttons[i].getSize().height * 2);
+            }
         }  
     }//GEN-LAST:event_formComponentResized
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setLayout(null);
+        insets = this.getInsets();
         for (int i = 0; i < cellsWidth; i++)
         {
             for (int j = 0; j < cellsHeight; j++)
@@ -127,11 +153,27 @@ public class MainWindow extends javax.swing.JFrame {
         mainPanel.setSize(mainPanels[0][0].getSize().width * cellsWidth, mainPanels[0][0].getSize().height * cellsHeight);
         mainPanel.setLocation(0, 0);
         
-        textPanel.setSize((int)((double)this.getSize().width * 0.8), this.getSize().height - mainPanel.getSize().height);
-        textPanel.setLocation(0, this.getSize().height - textPanel.getSize().height);
+        bottomPanel.setSize((int)((double)this.getSize().width * 0.8), this.getSize().height - mainPanel.getSize().height);
+        bottomPanel.setLocation(0, this.getSize().height - bottomPanel.getSize().height);
             
-        menuPanel.setSize(this.getSize().width - mainPanel.getSize().width, this.getSize().height);
-        menuPanel.setLocation(this.getSize().width - menuPanel.getSize().width, 0);
+        rightPanel.setSize(this.getSize().width - mainPanel.getSize().width, this.getSize().height);
+        rightPanel.setLocation(this.getSize().width - rightPanel.getSize().width, 0);
+        
+        for (int i = 0; i < 9; i++)
+        {
+            buttons[i] = new javax.swing.JButton();
+            bottomPanel.add(buttons[i]);
+            buttons[i].setSize(bottomPanel.getSize().width / 6, (bottomPanel.getSize().height - insets.top - 13) / 3);
+            if (i <= 2) buttons[i].setLocation(buttons[i].getSize().width * i, 0);
+            else if (i <= 5) buttons[i].setLocation(buttons[i].getSize().width * (i - 3), buttons[i].getSize().height);
+            else if (i <= 8) buttons[i].setLocation(buttons[i].getSize().width * (i - 6), buttons[i].getSize().height * 2);
+            buttons[i].setText(String.valueOf(bottomPanel.getSize().height / 3));
+        }
+        
+        //infoPanel.setLocation(bottomPanel.getSize().width / 2, WIDTH);
+        
+        
+        
         resizeWindow = true;
     }//GEN-LAST:event_formWindowOpened
 
@@ -166,13 +208,16 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bottomPanel;
+    private javax.swing.JPanel infoPanel;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JPanel menuPanel;
-    private javax.swing.JPanel textPanel;
+    private javax.swing.JPanel rightPanel;
     // End of variables declaration//GEN-END:variables
+    javax.swing.JButton[] buttons = new javax.swing.JButton[9];
     int cellsWidth = 14;
     int cellsHeight = 10;
     private javax.swing.JPanel[][] mainPanels = new javax.swing.JPanel[cellsWidth][cellsHeight];
     private java.util.Random rnd = new java.util.Random();
     boolean resizeWindow = false;
+    Insets insets;
 }
