@@ -86,51 +86,52 @@ public class MainWindow extends javax.swing.JFrame {
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         if (resizeWindow)
         {
-            menuPanel.setSize(this.getSize().width / 5, this.getSize().height);
-            menuPanel.setLocation(this.getSize().width - menuPanel.getSize().width, 0);
-        
-            textPanel.setSize((int)((double)this.getSize().width * 0.8), this.getSize().height / 5);
-            textPanel.setLocation(0, this.getSize().height - textPanel.getSize().height);
-        
-            mainPanel.setSize((int)((double)this.getSize().width * 0.8), (int)((double)this.getSize().height * 0.8));
-            mainPanel.setLocation(0, 0);
-        
             for (int i = 0; i < cellsWidth; i++)
             {
                 for (int j = 0; j < cellsHeight; j++)
                 {
-                mainPanels[i][j].setSize(mainPanel.getSize().width / cellsWidth, mainPanel.getSize().height / cellsHeight);
+                mainPanels[i][j].setSize((int)((double)this.getSize().width * 0.8) / cellsWidth, 
+                        (int)((double)this.getSize().height * 0.8) / cellsHeight);
                 mainPanels[i][j].setLocation(mainPanels[i][j].getSize().width * i, mainPanels[i][j].getSize().height * j);
                 mainPanels[i][j].repaint();
                 }
             }
-        }
+            
+            mainPanel.setSize(mainPanels[0][0].getSize().width * cellsWidth, mainPanels[0][0].getSize().height * cellsHeight);
+        
+            textPanel.setSize((int)((double)this.getSize().width * 0.8), this.getSize().height - mainPanel.getSize().height);
+            textPanel.setLocation(0, this.getSize().height - textPanel.getSize().height);
+            
+            menuPanel.setSize(this.getSize().width - mainPanel.getSize().width, this.getSize().height);
+            menuPanel.setLocation(this.getSize().width - menuPanel.getSize().width, 0);
+        }  
     }//GEN-LAST:event_formComponentResized
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setLayout(null);
-        menuPanel.setSize(this.getSize().width / 5, this.getSize().height);
-        menuPanel.setLocation(this.getSize().width - menuPanel.getSize().width, 0);
-        
-        textPanel.setSize((int)((double)this.getSize().width * 0.8), this.getSize().height / 5);
-        textPanel.setLocation(0, this.getSize().height - textPanel.getSize().height);
-        
-        mainPanel.setSize((int)((double)this.getSize().width * 0.8), (int)((double)this.getSize().height * 0.8));
-        mainPanel.setLocation(0, 0);
-        
         for (int i = 0; i < cellsWidth; i++)
         {
             for (int j = 0; j < cellsHeight; j++)
             {
-            mainPanels[i][j] = new javax.swing.JPanel();
-            mainPanels[i][j].setBackground(new Color(rnd.nextInt(255), rnd.nextInt(255), rnd.nextInt(255)));
-            mainPanels[i][j].setSize(mainPanel.getSize().width / cellsWidth, mainPanel.getSize().height / cellsHeight);
-            mainPanels[i][j].setLocation(mainPanels[i][j].getSize().width * i, mainPanels[i][j].getSize().height * j);
-            mainPanel.add(mainPanels[i][j]);
-            
-            mainPanels[i][j].repaint();
+                mainPanels[i][j] = new javax.swing.JPanel();
+                mainPanels[i][j].setBackground(new Color(rnd.nextInt(255), rnd.nextInt(255), rnd.nextInt(255)));
+                mainPanels[i][j].setSize((int)((double)this.getSize().width * 0.8) / cellsWidth, 
+                        (int)((double)this.getSize().height * 0.8) / cellsHeight);
+                mainPanels[i][j].setLocation(mainPanels[i][j].getSize().width * i, mainPanels[i][j].getSize().height * j);
+                mainPanel.add(mainPanels[i][j]);
+                mainPanels[i][j].repaint();
+                
             }
         }
+            
+        mainPanel.setSize(mainPanels[0][0].getSize().width * cellsWidth, mainPanels[0][0].getSize().height * cellsHeight);
+        mainPanel.setLocation(0, 0);
+        
+        textPanel.setSize((int)((double)this.getSize().width * 0.8), this.getSize().height - mainPanel.getSize().height);
+        textPanel.setLocation(0, this.getSize().height - textPanel.getSize().height);
+            
+        menuPanel.setSize(this.getSize().width - mainPanel.getSize().width, this.getSize().height);
+        menuPanel.setLocation(this.getSize().width - menuPanel.getSize().width, 0);
         resizeWindow = true;
     }//GEN-LAST:event_formWindowOpened
 
@@ -169,7 +170,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel textPanel;
     // End of variables declaration//GEN-END:variables
-    int cellsWidth = 13;
+    int cellsWidth = 14;
     int cellsHeight = 10;
     private javax.swing.JPanel[][] mainPanels = new javax.swing.JPanel[cellsWidth][cellsHeight];
     private java.util.Random rnd = new java.util.Random();
