@@ -4,12 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
@@ -122,6 +123,19 @@ public class MainWindow extends javax.swing.JFrame {
             
             mainPictureBox.setImage(currentImage);
             mainPictureBox.setSize(rightPanel.getSize().width - 20, rightPanel.getSize().height / 2);
+            
+            scrollMainText.setLocation(0, mainPictureBox.getSize().height);
+            scrollMainText.setSize(mainPictureBox.getSize().width, mainPictureBox.getSize().height * 9 / 10 - insets.top);
+            
+            for (int i = 0; i < 2; i++)
+            {
+                mainButtons[i].setLocation(i * (rightPanel.getSize().width / 2 - 10), mainPictureBox.getSize().height + scrollMainText.getSize().height);
+                mainButtons[i].setSize(rightPanel.getSize().width / 2 - 10, rightPanel.getSize().height - mainPictureBox.getSize().height
+                - scrollMainText.getSize().height - insets.top - 13);
+            }
+            
+            scrollInfoText.setLocation(0, 0);
+            scrollInfoText.setSize(infoPanel.getSize().width - 10, infoPanel.getSize().height);
         }  
     }//GEN-LAST:event_formComponentResized
 
@@ -176,6 +190,61 @@ public class MainWindow extends javax.swing.JFrame {
         mainPictureBox.setSize(rightPanel.getSize().width - 20, rightPanel.getSize().height / 2);
         rightPanel.add(mainPictureBox);
         
+        
+        
+        mainText.setLineWrap(true);
+        mainText.setWrapStyleWord(true); 
+        mainText.setEditable(false);  
+        mainText.setBackground(null);  
+        mainText.setBorder(null);  
+        
+        scrollMainText = new JScrollPane(mainText);
+        scrollMainText.setBackground(null);
+        scrollMainText.setBorder(null);
+        scrollMainText.getViewport().setBackground(null);
+        JScrollBar verticalBar = scrollMainText.getVerticalScrollBar();
+        verticalBar.setUI(new CustomScrollBarUI());
+        rightPanel.add(scrollMainText);
+        
+        scrollMainText.setLocation(0, mainPictureBox.getSize().height);
+        scrollMainText.setSize(mainPictureBox.getSize().width, mainPictureBox.getSize().height * 9 / 10 - insets.top);
+        
+        
+        infoText.setLineWrap(true);
+        infoText.setWrapStyleWord(true); 
+        infoText.setEditable(false);  
+        infoText.setBackground(null);  
+        infoText.setBorder(null);
+        
+        
+        scrollInfoText = new JScrollPane(infoText);
+        scrollInfoText.setBackground(null);
+        scrollInfoText.setBorder(null);
+        scrollInfoText.getViewport().setBackground(null);
+        JScrollBar verticalBarInfo = scrollInfoText.getVerticalScrollBar();
+        verticalBarInfo.setUI(new CustomScrollBarUI());
+        infoPanel.add(scrollInfoText);
+        
+        scrollInfoText.setLocation(0, 0);
+        scrollInfoText.setSize(infoPanel.getSize().width - 10, infoPanel.getSize().height);
+        
+        
+        String temp = "";
+        for (int i = 0; i < 100; i++) temp += "rerererere\n";
+        temp += "fsdfd dfdsf dfghg  jnjnhub vcfcfgv hbnjhinjin vftrcrdc hnjinjin mimjin vftcdrc gvhubhnji nihnhubgy rcrdcxrdc bhubjinjin ijnhubnhubgv tfcdrcftc gvhubhubnhn hubgyv";
+        mainText.setText(temp);
+        infoText.setText(temp);
+        
+        for (int i = 0; i < 2; i++)
+        {
+            mainButtons[i] = new javax.swing.JButton();
+            mainButtons[i].setLocation(i * (rightPanel.getSize().width / 2 - 10), mainPictureBox.getSize().height + scrollMainText.getSize().height);
+                mainButtons[i].setSize(rightPanel.getSize().width / 2 - 10, rightPanel.getSize().height - mainPictureBox.getSize().height
+                - scrollMainText.getSize().height - insets.top - 13);
+            mainButtons[i].setText("sd");
+            rightPanel.add(mainButtons[i]);
+        }
+        
         resizeWindow = true;
     }//GEN-LAST:event_formWindowOpened
 
@@ -208,6 +277,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+    private void setComponents()
+    {
+        
+    }
+    private void repaintComponents()
+    {
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
@@ -215,7 +292,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel rightPanel;
     // End of variables declaration//GEN-END:variables
+    JScrollPane scrollMainText = null;
+    javax.swing.JTextArea mainText = new javax.swing.JTextArea();
+    
+    JScrollPane scrollInfoText = null;
+    javax.swing.JTextArea infoText = new javax.swing.JTextArea();
+    
     javax.swing.JButton[] buttons = new javax.swing.JButton[9];
+    javax.swing.JButton[] mainButtons = new javax.swing.JButton[2];
     PictureBox mainPictureBox = new PictureBox();
     Image currentImage = null;
     int cellsWidth = 14;
@@ -255,3 +339,27 @@ class PictureBox extends javax.swing.JLabel
     }
 }
 }
+class CustomScrollBarUI extends BasicScrollBarUI {
+        @Override
+        protected void configureScrollBarColors() {
+            this.thumbColor = Color.YELLOW; 
+            this.trackColor = Color.BLUE;
+        }
+
+        @Override
+        protected JButton createDecreaseButton(int orientation) {
+            return createColoredButton(Color.BLUE); 
+        }
+
+        @Override
+        protected JButton createIncreaseButton(int orientation) {
+            return createColoredButton(Color.BLUE);
+        }
+
+        private JButton createColoredButton(Color color) {
+            JButton button = new JButton();
+            button.setBackground(color);
+            button.setBorder(BorderFactory.createEmptyBorder());
+            return button;
+        }
+    }
