@@ -1,7 +1,10 @@
 package advan;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Point;
@@ -14,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
@@ -218,6 +222,24 @@ public class MainWindow extends javax.swing.JFrame {
         }
         mainButtons[0].setText("Save");
         mainButtons[1].setText("Load");
+        
+        try
+        {
+             Font customFont = Font.createFont(Font.TRUETYPE_FONT, MainWindow.class.getResourceAsStream("/fonts/FriendInfo.ttf"));
+             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+             ge.registerFont(customFont);
+             for (int i = 0; i < 9; i++) buttons[i].setFont(customFont.deriveFont(Font.PLAIN, 12));
+             mainText.setFont(customFont.deriveFont(Font.PLAIN, 12));
+             infoText.setFont(customFont.deriveFont(Font.PLAIN, 12));
+             mainButtons[0].setFont(customFont.deriveFont(Font.PLAIN, 12));
+             mainButtons[1].setFont(customFont.deriveFont(Font.PLAIN, 12));
+        }
+        catch (IOException | FontFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Ошибка загрузки шрифта", "Ошибка", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
         resizeWindow = true;
     }
     private void repaintComponents()

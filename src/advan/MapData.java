@@ -2,9 +2,9 @@ package advan;
 
 import java.util.List;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 public class MapData {
     int cellsWidth = 28;
@@ -18,9 +18,10 @@ public class MapData {
     public void resetMap(String pathMap)
     {
         List<String> lines = null;
-        try {
-            lines = Files.readAllLines(Paths.get(MainWindow.class.getResource(pathMap).toURI()));
-        } catch (IOException | URISyntaxException e) {
+        try (InputStream is = MainWindow.class.getResourceAsStream(pathMap)) {
+            String content = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            lines = content.lines().collect(Collectors.toList());
+        } catch (IOException e) {
             System.out.println(e.getMessage());
             System.exit(0);
         }
