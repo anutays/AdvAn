@@ -3,7 +3,6 @@ package advan;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Insets;
@@ -13,16 +12,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
-import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.InputMap;
-import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 public class MainWindow extends javax.swing.JFrame {
+    
+    // <editor-fold defaultstate="collapsed" desc="public MainWindow()">
     public MainWindow() {
         initComponents();
         blackPanel.setBackground(Color.BLACK);
@@ -31,7 +31,10 @@ public class MainWindow extends javax.swing.JFrame {
         this.setGlassPane(blackPanel);
         setBlackPanel(true);
     }
+    // </editor-fold>
+    
     @SuppressWarnings("unchecked")
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -55,8 +58,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        rightPanel.setBackground(new java.awt.Color(255, 51, 51));
-        rightPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        rightPanel.setBackground(new java.awt.Color(90, 104, 183));
         rightPanel.setAlignmentX(0.2F);
         rightPanel.setAlignmentY(0.0F);
         rightPanel.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -64,10 +66,10 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().add(rightPanel);
         rightPanel.setBounds(310, 0, 90, 300);
 
-        bottomPanel.setBackground(new java.awt.Color(153, 255, 51));
+        bottomPanel.setBackground(new java.awt.Color(90, 104, 183));
         bottomPanel.setLayout(null);
 
-        infoPanel.setBackground(new java.awt.Color(102, 0, 153));
+        infoPanel.setBackground(new java.awt.Color(90, 104, 183));
 
         javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
         infoPanel.setLayout(infoPanelLayout);
@@ -86,17 +88,18 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().add(bottomPanel);
         bottomPanel.setBounds(0, 230, 310, 70);
 
-        mainPanel.setBackground(new java.awt.Color(255, 255, 204));
+        mainPanel.setBackground(new java.awt.Color(102, 102, 102));
+        mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
+            .addGap(0, 308, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
+            .addGap(0, 228, Short.MAX_VALUE)
         );
 
         getContentPane().add(mainPanel);
@@ -104,23 +107,28 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // <editor-fold defaultstate="collapsed" desc="private void formComponentResized(java.awt.event.ComponentEvent evt)">
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         if (resizeWindow)
         {
             repaintComponents();
         }  
     }//GEN-LAST:event_formComponentResized
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void formWindowOpened(java.awt.event.WindowEvent evt)">
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        currentMap.resetMap("maps/1.txt");
         setComponents();
         repaintComponents();
         setBlackPanel(false);
-        currentMap.resetMap("maps/1.txt");
         drawMap(currentMap);
         setButtons("main");
     }//GEN-LAST:event_formWindowOpened
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="public static void main(String args[])">
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -150,6 +158,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void setComponents()">
     private void setComponents()
     {
         this.setLayout(null);
@@ -159,27 +170,32 @@ public class MainWindow extends javax.swing.JFrame {
             for (int j = 0; j < cellsHeight; j++)
             {
                 mainPanels[i][j] = new javax.swing.JPanel();
+                mainPanels[i][j].setLayout(null);
                 mainPanels[i][j].setBackground(new Color(rnd.nextInt(255), rnd.nextInt(255), rnd.nextInt(255)));
+                picturesOnMainPanels[i][j] = new PictureMainPanel();
+                picturesOnMainPanels[i][j].setLocation(0, 0);
+                mainPanels[i][j].add(picturesOnMainPanels[i][j]);
                 mainPanel.add(mainPanels[i][j]);
             }
         }  
         
         for (int i = 0; i < 9; i++)
         {
-            buttons[i] = new javax.swing.JButton();
+            buttons[i] = new MultiTextButton();
             bottomPanel.add(buttons[i]);
         }
         
         try {
-            currentImage = ImageIO.read(MainWindow.class.getResource("pictures/1.PNG"));
+            currentImage = ImageIO.read(MainWindow.class.getResource("pictures/main/back1.png"));
+            mapEmpty = ImageIO.read(MainWindow.class.getResource("pictures/map/empty.png"));
+            mapBlock = ImageIO.read(MainWindow.class.getResource("pictures/map/block.png"));
+            mapPlayer = ImageIO.read(MainWindow.class.getResource("pictures/map/player.png"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
         mainPictureBox.setImage(currentImage);
         rightPanel.add(mainPictureBox);
-        
-        
-        
+
         mainText.setLineWrap(true);
         mainText.setWrapStyleWord(true); 
         mainText.setEditable(false);  
@@ -210,8 +226,7 @@ public class MainWindow extends javax.swing.JFrame {
         infoPanel.add(scrollInfoText);
 
         String temp = "";
-        for (int i = 0; i < 100; i++) temp += "rerererere\n";
-        temp += "fsdfd dfdsf dfghg  jnjnhub vcfcfgv hbnjhinjin vftrcrdc hnjinjin mimjin vftcdrc gvhubhnji nihnhubgy rcrdcxrdc bhubjinjin ijnhubnhubgv tfcdrcftc gvhubhubnhn hubgyv";
+        for (int i = 0; i < 100; i++) temp += "test\n";
         mainText.setText(temp);
         infoText.setText(temp);
         
@@ -228,11 +243,11 @@ public class MainWindow extends javax.swing.JFrame {
              Font customFont = Font.createFont(Font.TRUETYPE_FONT, MainWindow.class.getResourceAsStream("/fonts/FriendInfo.ttf"));
              GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
              ge.registerFont(customFont);
-             for (int i = 0; i < 9; i++) buttons[i].setFont(customFont.deriveFont(Font.PLAIN, 12));
-             mainText.setFont(customFont.deriveFont(Font.PLAIN, 12));
-             infoText.setFont(customFont.deriveFont(Font.PLAIN, 12));
-             mainButtons[0].setFont(customFont.deriveFont(Font.PLAIN, 12));
-             mainButtons[1].setFont(customFont.deriveFont(Font.PLAIN, 12));
+             for (int i = 0; i < 9; i++) buttons[i].setFont(customFont.deriveFont(Font.PLAIN, sizeFont));
+             mainText.setFont(customFont.deriveFont(Font.PLAIN, sizeFont));
+             infoText.setFont(customFont.deriveFont(Font.PLAIN, sizeFont));
+             mainButtons[0].setFont(customFont.deriveFont(Font.PLAIN, sizeFont));
+             mainButtons[1].setFont(customFont.deriveFont(Font.PLAIN, sizeFont));
         }
         catch (IOException | FontFormatException e)
         {
@@ -242,6 +257,9 @@ public class MainWindow extends javax.swing.JFrame {
         
         resizeWindow = true;
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void repaintComponents()">
     private void repaintComponents()
     {
         for (int i = 0; i < cellsWidth; i++)
@@ -251,10 +269,11 @@ public class MainWindow extends javax.swing.JFrame {
                 mainPanels[i][j].setSize((int)((double)this.getSize().width * 0.8) / cellsWidth, 
                         (int)((double)this.getSize().height * 0.8) / cellsHeight);
                 mainPanels[i][j].setLocation(mainPanels[i][j].getSize().width * i, mainPanels[i][j].getSize().height * j);
+                picturesOnMainPanels[i][j].setSize(mainPanels[i][j].getSize());
                 mainPanels[i][j].repaint();
                 }
             }
-            
+            drawMap(currentMap);
             mainPanel.setSize(mainPanels[0][0].getSize().width * cellsWidth, mainPanels[0][0].getSize().height * cellsHeight);
             bottomPanel.setSize(mainPanels[0][0].getSize().width * cellsWidth, this.getSize().height - mainPanel.getSize().height);
             bottomPanel.setLocation(0, this.getSize().height - bottomPanel.getSize().height);
@@ -290,6 +309,9 @@ public class MainWindow extends javax.swing.JFrame {
             scrollInfoText.setSize(infoPanel.getSize().width, infoPanel.getSize().height);
             scrollInfoText.revalidate();
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void setBlackPanel(boolean is)">
     private void setBlackPanel(boolean is)
     {
         if (is)
@@ -301,6 +323,9 @@ public class MainWindow extends javax.swing.JFrame {
             blackPanel.setVisible(false);
         }
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void drawMap(MapData map)">
     private void drawMap(MapData map)
     {
         for (int i = 0; i < cellsWidth; i++)
@@ -310,20 +335,29 @@ public class MainWindow extends javax.swing.JFrame {
                 if (map.places[i][j] == TypePlace.nothing) 
                 {
                     mainPanels[i][j].setBackground(Color.GRAY);
+                    picturesOnMainPanels[i][j].setImage(mapEmpty);
                 }
                 if (map.places[i][j] == TypePlace.block) 
                 {
                     mainPanels[i][j].setBackground(Color.BLUE);
+                    picturesOnMainPanels[i][j].setImage(mapBlock);
                 }
                 if (map.places[i][j] == TypePlace.error) 
                 {
                     mainPanels[i][j].setBackground(Color.RED);
                 }
-                if (i == playerXY.x && j == playerXY.y) mainPanels[i][j].setBackground(Color.YELLOW);
+                if (i == playerXY.x && j == playerXY.y)
+                {
+                    mainPanels[i][j].setBackground(Color.YELLOW);
+                    picturesOnMainPanels[i][j].setImage(mapPlayer);
+                }
+                    
             }
         }
-        
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void setButtons(String mode)">
     private void setButtons(String mode)
     {
         if (mode.equals("main"))
@@ -333,15 +367,22 @@ public class MainWindow extends javax.swing.JFrame {
             buttons[5].setAction(new buttonMovePlayerRight());
             buttons[7].setAction(new buttonMovePlayerDown());
             buttons[1].setText("Up");
+            buttons[1].setSecondaryText("W", sizeFont - 2);
             buttons[3].setText("Left");
+            buttons[3].setSecondaryText("A", sizeFont - 2);
             buttons[5].setText("Right");
+            buttons[5].setSecondaryText("D", sizeFont - 2);
             buttons[7].setText("Down");
+            buttons[7].setSecondaryText("S", sizeFont - 2);
             setKeyStroke("W", "up");
             setKeyStroke("S", "down");
             setKeyStroke("D", "right");
             setKeyStroke("A", "left");
         }
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void setKeyStroke(String key, String action)">
     private void setKeyStroke(String key, String action)
     {
         KeyStroke keyStroke = KeyStroke.getKeyStroke(key);
@@ -353,6 +394,9 @@ public class MainWindow extends javax.swing.JFrame {
         if (action.equals("right")) actionMap.put(action, new buttonMovePlayerRight());
         if (action.equals("left")) actionMap.put(action, new buttonMovePlayerLeft());
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="classes buttonMovePlayer">
     class buttonMovePlayerUp extends AbstractAction
     {
         @Override
@@ -397,6 +441,7 @@ public class MainWindow extends javax.swing.JFrame {
             drawMap(currentMap);
         }
     }
+    // </editor-fold>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
@@ -407,75 +452,24 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel blackPanel = new javax.swing.JPanel();
     JScrollPane scrollMainText = null;
     javax.swing.JTextArea mainText = new javax.swing.JTextArea();
-    
     JScrollPane scrollInfoText = null;
     javax.swing.JTextArea infoText = new javax.swing.JTextArea();
-    
-    javax.swing.JButton[] buttons = new javax.swing.JButton[9];
+    MultiTextButton[] buttons = new MultiTextButton[9];
     javax.swing.JButton[] mainButtons = new javax.swing.JButton[2];
     PictureBox mainPictureBox = new PictureBox();
     Image currentImage = null;
     int cellsWidth = 28;
     int cellsHeight = 20;
     private javax.swing.JPanel[][] mainPanels = new javax.swing.JPanel[cellsWidth][cellsHeight];
+    private PictureMainPanel[][] picturesOnMainPanels = new PictureMainPanel[cellsWidth][cellsHeight];
     private java.util.Random rnd = new java.util.Random();
     boolean resizeWindow = false;
     Insets insets;
     MapData currentMap = new MapData();
-    
-    Point playerXY = new Point(1, 1);
+    int sizeFont = 15;
+    Point playerXY = new Point(2, 2);
+    Image mapEmpty = null;
+    Image mapBlock = null;
+    Image mapPlayer = null;
 }
-class PictureBox extends javax.swing.JLabel
-{
-    Image image;
-    void setImage(Image _image)
-    {
-        image = _image;
-    }
-    @Override
-    protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    if (image != null) {
-        double imgRatio = (double) image.getWidth(null) / image.getHeight(null);
-        double labelRatio = (double) getWidth() / getHeight();
 
-        int newWidth, newHeight;
-        if (labelRatio > imgRatio) {
-            newHeight = getHeight();
-            newWidth = (int) (newHeight * imgRatio);
-        } else {
-            newWidth = getWidth();
-            newHeight = (int) (newWidth / imgRatio);
-        }
-        int x = (getWidth() - newWidth) / 2;
-        int y = (getHeight() - newHeight) / 2;
-
-        image = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        g.drawImage(image, x, y, newWidth, newHeight, this);
-    }
-}
-}
-class CustomScrollBarUI extends BasicScrollBarUI {
-        @Override
-        protected void configureScrollBarColors() {
-            this.thumbColor = Color.YELLOW; 
-            this.trackColor = Color.BLUE;
-        }
-
-        @Override
-        protected JButton createDecreaseButton(int orientation) {
-            return createColoredButton(Color.BLUE); 
-        }
-
-        @Override
-        protected JButton createIncreaseButton(int orientation) {
-            return createColoredButton(Color.BLUE);
-        }
-
-        private JButton createColoredButton(Color color) {
-            JButton button = new JButton();
-            button.setBackground(color);
-            button.setBorder(BorderFactory.createEmptyBorder());
-            return button;
-        }
-    }

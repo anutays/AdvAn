@@ -43,12 +43,7 @@ public class MapData {
                 
                 if (words[i][j].equals("n")) places[i][j] = TypePlace.nothing;
                 else if (words[i][j].equals("b")) places[i][j] = TypePlace.block;
-                else 
-                {
-                    System.out.print(words[i][j] + " ");
-                    places[i][j] = TypePlace.error;
-                    
-                }   
+                else places[i][j] = TypePlace.error;
             }
         }
     }
