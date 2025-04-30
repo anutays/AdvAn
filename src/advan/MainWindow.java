@@ -58,7 +58,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        rightPanel.setBackground(new java.awt.Color(90, 104, 183));
+        rightPanel.setBackground(new java.awt.Color(43, 43, 44));
         rightPanel.setAlignmentX(0.2F);
         rightPanel.setAlignmentY(0.0F);
         rightPanel.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -66,10 +66,10 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().add(rightPanel);
         rightPanel.setBounds(310, 0, 90, 300);
 
-        bottomPanel.setBackground(new java.awt.Color(90, 104, 183));
+        bottomPanel.setBackground(new java.awt.Color(43, 43, 44));
         bottomPanel.setLayout(null);
 
-        infoPanel.setBackground(new java.awt.Color(90, 104, 183));
+        infoPanel.setBackground(new java.awt.Color(43, 43, 44));
 
         javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
         infoPanel.setLayout(infoPanelLayout);
@@ -182,6 +182,8 @@ public class MainWindow extends javax.swing.JFrame {
         for (int i = 0; i < 9; i++)
         {
             buttons[i] = new MultiTextButton();
+            buttons[i].setBackground(new Color(43, 43, 44));
+            buttons[i].setForeground(new Color(220, 220, 220));
             bottomPanel.add(buttons[i]);
         }
         
@@ -199,8 +201,9 @@ public class MainWindow extends javax.swing.JFrame {
         mainText.setLineWrap(true);
         mainText.setWrapStyleWord(true); 
         mainText.setEditable(false);  
-        mainText.setBackground(null);  
-        mainText.setBorder(null);  
+        mainText.setBackground(new Color(43, 43, 44));
+        mainText.setBorder(null); 
+        mainText.setForeground(new Color(220, 220, 220));
         
         scrollMainText = new JScrollPane(mainText);
         scrollMainText.setBackground(null);
@@ -213,9 +216,9 @@ public class MainWindow extends javax.swing.JFrame {
         infoText.setLineWrap(true);
         infoText.setWrapStyleWord(true); 
         infoText.setEditable(false);  
-        infoText.setBackground(null);  
+        infoText.setBackground(new Color(43, 43, 44)); 
         infoText.setBorder(null);
-        
+        infoText.setForeground(new Color(220, 220, 220));
         
         scrollInfoText = new JScrollPane(infoText);
         scrollInfoText.setBackground(null);
@@ -233,6 +236,8 @@ public class MainWindow extends javax.swing.JFrame {
         for (int i = 0; i < 2; i++)
         {
             mainButtons[i] = new javax.swing.JButton();
+            mainButtons[i].setBackground(new Color(43, 43, 44));
+            mainButtons[i].setForeground(new Color(220, 220, 220));
             rightPanel.add(mainButtons[i]);
         }
         mainButtons[0].setText("Save");
@@ -334,12 +339,12 @@ public class MainWindow extends javax.swing.JFrame {
             {
                 if (map.places[i][j] == TypePlace.nothing) 
                 {
-                    mainPanels[i][j].setBackground(Color.GRAY);
+                    mainPanels[i][j].setBackground(new Color(177, 177, 177));
                     picturesOnMainPanels[i][j].setImage(mapEmpty);
                 }
                 if (map.places[i][j] == TypePlace.block) 
                 {
-                    mainPanels[i][j].setBackground(Color.BLUE);
+                    mainPanels[i][j].setBackground(new Color(107, 107, 107));
                     picturesOnMainPanels[i][j].setImage(mapBlock);
                 }
                 if (map.places[i][j] == TypePlace.error) 
@@ -348,10 +353,11 @@ public class MainWindow extends javax.swing.JFrame {
                 }
                 if (i == playerXY.x && j == playerXY.y)
                 {
-                    mainPanels[i][j].setBackground(Color.YELLOW);
+                    mainPanels[i][j].setBackground(new Color(
+                            mainPanels[i][j].getBackground().getRed(), mainPanels[i][j].getBackground().getGreen(), 
+                            mainPanels[i][j].getBackground().getBlue() - 1));
                     picturesOnMainPanels[i][j].setImage(mapPlayer);
                 }
-                    
             }
         }
     }
@@ -471,6 +477,5 @@ public class MainWindow extends javax.swing.JFrame {
     Image mapEmpty = null;
     Image mapBlock = null;
     Image mapPlayer = null;
-    int w;
 }
 

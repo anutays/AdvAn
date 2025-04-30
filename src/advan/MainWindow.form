@@ -38,7 +38,7 @@
     <Container class="javax.swing.JPanel" name="rightPanel">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="b7" green="68" red="5a" type="rgb"/>
+          <Color blue="2c" green="2b" red="2b" type="rgb"/>
         </Property>
         <Property name="alignmentX" type="float" value="0.2"/>
         <Property name="alignmentY" type="float" value="0.0"/>
@@ -59,7 +59,7 @@
     <Container class="javax.swing.JPanel" name="bottomPanel">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="b7" green="68" red="5a" type="rgb"/>
+          <Color blue="2c" green="2b" red="2b" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
@@ -75,7 +75,7 @@
         <Container class="javax.swing.JPanel" name="infoPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="b7" green="68" red="5a" type="rgb"/>
+              <Color blue="2c" green="2b" red="2b" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
