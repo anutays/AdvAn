@@ -471,5 +471,6 @@ public class MainWindow extends javax.swing.JFrame {
     Image mapEmpty = null;
     Image mapBlock = null;
     Image mapPlayer = null;
+    int w;
 }
 
