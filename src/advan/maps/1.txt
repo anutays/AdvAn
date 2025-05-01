@@ -6,7 +6,7 @@ b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|n|n|n|b|b|b|b|b|b|b|b
 b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|n|n|n|b|b|b|b|b|b|b|b
 n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n
 n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n
-n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n
+n|n|n|n|n|n|NPCTest|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n
 n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n
 n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n
 n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n|n

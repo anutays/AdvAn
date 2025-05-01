@@ -1,14 +1,18 @@
 package advan;
 
+import java.awt.Point;
 import java.util.List;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MapData {
     int cellsWidth = 28;
     int cellsHeight = 20;
+    public Map<TypePlace, Point> items = new HashMap<>();
     public TypePlace[][] places = new TypePlace[cellsWidth][cellsHeight];
     public MapData()
     {
@@ -43,6 +47,11 @@ public class MapData {
                 
                 if (words[i][j].equals("n")) places[i][j] = TypePlace.nothing;
                 else if (words[i][j].equals("b")) places[i][j] = TypePlace.block;
+                else if (words[i][j].equals("NPCTest"))
+                {
+                    places[i][j] = TypePlace.npcTest;
+                    items.put(TypePlace.npcTest, new Point(i, j));
+                }  
                 else places[i][j] = TypePlace.error;
             }
         }
@@ -50,5 +59,5 @@ public class MapData {
 }
 enum TypePlace
 {
-    nothing, block, error
+    nothing, block, error, npcTest
 }

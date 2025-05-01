@@ -164,6 +164,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void setComponents()
     {
         this.setLayout(null);
+        isOnItem = false;
         insets = this.getInsets();
         for (int i = 0; i < cellsWidth; i++)
         {
@@ -192,6 +193,7 @@ public class MainWindow extends javax.swing.JFrame {
             mapEmpty = ImageIO.read(MainWindow.class.getResource("pictures/map/empty.png"));
             mapBlock = ImageIO.read(MainWindow.class.getResource("pictures/map/block.png"));
             mapPlayer = ImageIO.read(MainWindow.class.getResource("pictures/map/player.png"));
+            mapNpc = ImageIO.read(MainWindow.class.getResource("pictures/map/npc.png"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -230,7 +232,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         String temp = "";
         for (int i = 0; i < 100; i++) temp += "test\n";
-        mainText.setText(temp);
+        mainText.setText("You are in a dark city. You hardly see anyone alive.");
         infoText.setText(temp);
         
         for (int i = 0; i < 2; i++)
@@ -347,6 +349,11 @@ public class MainWindow extends javax.swing.JFrame {
                     mainPanels[i][j].setBackground(new Color(107, 107, 107));
                     picturesOnMainPanels[i][j].setImage(mapBlock);
                 }
+                if (map.places[i][j] == TypePlace.npcTest) 
+                {
+                    mainPanels[i][j].setBackground(new Color(177, 177, 177));
+                    picturesOnMainPanels[i][j].setImage(mapNpc);
+                }
                 if (map.places[i][j] == TypePlace.error) 
                 {
                     mainPanels[i][j].setBackground(Color.RED);
@@ -402,6 +409,47 @@ public class MainWindow extends javax.swing.JFrame {
     }
     // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="private void findItem()">
+    private void findItem()
+    {
+        for (TypePlace typePlace : currentMap.items.keySet())
+        {
+            if (typePlace == TypePlace.npcTest && playerXY.equals(currentMap.items.get(typePlace)))
+            {
+                try
+                {
+                    currentImage = ImageIO.read(MainWindow.class.getResource("pictures/main/testNpc.png"));
+                    mainPictureBox.setImage(currentImage);
+                    mainPictureBox.repaint();
+                    
+                    mainText.setText("You see a woman in a suit.");
+                    
+                    isOnItem = true;
+                }
+                catch (IOException ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            else if (isOnItem)
+            {
+                try
+                {
+                    currentImage = ImageIO.read(MainWindow.class.getResource("pictures/main/back1.png"));
+                    mainPictureBox.setImage(currentImage);
+                    mainPictureBox.repaint();
+                    mainText.setText("You are in a dark city. You hardly see anyone alive.");
+                    isOnItem = false;
+                }
+                catch (IOException ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+    }
+    // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="classes buttonMovePlayer">
     class buttonMovePlayerUp extends AbstractAction
     {
@@ -412,6 +460,7 @@ public class MainWindow extends javax.swing.JFrame {
             if (currentMap.places[playerXY.x][playerXY.y - 1] == TypePlace.block) return;
             playerXY.y -= 1;
             drawMap(currentMap);
+            findItem();
         }
     }
     class buttonMovePlayerDown extends AbstractAction
@@ -423,6 +472,7 @@ public class MainWindow extends javax.swing.JFrame {
             if (currentMap.places[playerXY.x][playerXY.y + 1] == TypePlace.block) return;
             playerXY.y += 1;
             drawMap(currentMap);
+            findItem();
         }
     }
     class buttonMovePlayerRight extends AbstractAction
@@ -434,6 +484,7 @@ public class MainWindow extends javax.swing.JFrame {
             if (currentMap.places[playerXY.x + 1][playerXY.y] == TypePlace.block) return;
             playerXY.x += 1;
             drawMap(currentMap);
+            findItem();
         }
     }
     class buttonMovePlayerLeft extends AbstractAction
@@ -445,10 +496,11 @@ public class MainWindow extends javax.swing.JFrame {
             if (currentMap.places[playerXY.x - 1][playerXY.y] == TypePlace.block) return;
             playerXY.x -= 1;
             drawMap(currentMap);
+            findItem();
         }
     }
     // </editor-fold>
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JPanel infoPanel;
@@ -477,5 +529,7 @@ public class MainWindow extends javax.swing.JFrame {
     Image mapEmpty = null;
     Image mapBlock = null;
     Image mapPlayer = null;
+    Image mapNpc = null;
+    boolean isOnItem;
 }
 
